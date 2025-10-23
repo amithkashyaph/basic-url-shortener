@@ -20,6 +20,8 @@ public class ShortUrlServiceImpl implements ShortUrlService {
     }
     @Override
     public List<ShortUrl> getAllShortUrls() {
-        return null;
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
+        List<ShortUrl> shortUrls = shortUrlRespository.findAllPublicUrls();
+        return shortUrls;
     }
 }
