@@ -12,4 +12,14 @@ import java.util.List;
 @Service
 public class ShortUrlServiceImpl implements ShortUrlService {
 
+    private ShortUrlRespository shortUrlRespository;
+
+    @Autowired
+    ShortUrlServiceImpl(ShortUrlRespository shortUrlRespository) {
+        this.shortUrlRespository = shortUrlRespository;
+    }
+    @Override
+    public List<ShortUrl> getAllShortUrls() {
+        return null;
+    }
 }
