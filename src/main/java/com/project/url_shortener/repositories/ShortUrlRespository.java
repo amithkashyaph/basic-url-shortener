@@ -19,5 +19,5 @@ public interface ShortUrlRespository extends JpaRepository<ShortUrl, Long> {
 
     boolean existsByShortKey(String shortKey);
 
-
+    Optional<ShortUrl> findByShortKey(String shortKey);
 }
