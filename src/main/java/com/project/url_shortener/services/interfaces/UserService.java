@@ -9,5 +9,5 @@ import com.project.url_shortener.exceptions.UserAlreadyExistsException;
 import java.util.List;
 
 public interface UserService {
-
+    UserDTO registerUser(UserRegisterDTO userRegisterDTO) throws UserAlreadyExistsException;
 }
