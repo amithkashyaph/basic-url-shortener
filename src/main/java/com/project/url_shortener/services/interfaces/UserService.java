@@ -10,4 +10,5 @@ import java.util.List;
 
 public interface UserService {
     UserDTO registerUser(UserRegisterDTO userRegisterDTO) throws UserAlreadyExistsException;
+    UserDTO loginUser(UserLoginDTO userLoginDTO) throws InvalidCredentialException;
 }
