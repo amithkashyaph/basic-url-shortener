@@ -15,4 +15,6 @@ public interface UserService {
     User getCurrentUser();
 
     PagedResult<ShortUrlDTO> getUsersShortUrls(int pageNumber, int pageSize, Long userId);
+
+    void deleteUsersUrls(List<Long> ids, Long userId) throws InvalidRequestBodyException;
 }
