@@ -14,4 +14,5 @@ public interface UserService {
 
     User getCurrentUser();
 
+    PagedResult<ShortUrlDTO> getUsersShortUrls(int pageNumber, int pageSize, Long userId);
 }
