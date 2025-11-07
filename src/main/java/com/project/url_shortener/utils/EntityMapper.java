@@ -9,4 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class EntityMapper {
 
+    public UserDTO toUserDTO(User createdBy) {
+        return new UserDTO(createdBy.getId(), createdBy.getName());
+    }
 }
