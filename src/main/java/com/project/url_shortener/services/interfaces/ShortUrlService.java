@@ -11,5 +11,5 @@ import java.util.List;
 public interface ShortUrlService {
     PagedResult<ShortUrlDTO> getAllShortUrls(int pageNumber, int pageSize);
 
-
+    ShortUrlDTO createShortUrl(CreateShortUrlDTO createShortUrlDTO);
 }
