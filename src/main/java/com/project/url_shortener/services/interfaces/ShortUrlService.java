@@ -9,4 +9,7 @@ import com.project.url_shortener.exceptions.ShortKeyDoesNotExistException;
 import java.util.List;
 
 public interface ShortUrlService {
+    PagedResult<ShortUrlDTO> getAllShortUrls(int pageNumber, int pageSize);
+
+
 }
