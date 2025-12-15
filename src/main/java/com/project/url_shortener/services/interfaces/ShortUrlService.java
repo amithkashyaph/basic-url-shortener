@@ -12,4 +12,6 @@ public interface ShortUrlService {
     PagedResult<ShortUrlDTO> getAllShortUrls(int pageNumber, int pageSize);
 
     ShortUrlDTO createShortUrl(CreateShortUrlDTO createShortUrlDTO);
+
+    ShortUrlDTO getOriginalUrlFromShortKey(String shortKey) throws ShortKeyDoesNotExistException;
 }
