@@ -27,5 +27,13 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
         this.userService = userService;
     }
+
+    @PostMapping("/register")
+    public UserDTO registerUser(@RequestBody @Valid UserRegisterDTO userRegisterDTO) throws UserAlreadyExistsException {
+        UserDTO userDTO = userService.registerUser(userRegisterDTO);
+        return userDTO;
+    }
+
+
 }
 
