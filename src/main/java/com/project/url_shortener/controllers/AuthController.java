@@ -34,6 +34,17 @@ public class AuthController {
         return userDTO;
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody UserLoginDTO request) {
+        UsernamePasswordAuthenticationToken authInputToken =
+                new UsernamePasswordAuthenticationToken(request.email(), request.password());
 
+        try {
+            authenticationManager.authenticate(authInputToken);
+            return ResponseEntity.ok("Login successful!");
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
+    }
 }
 
