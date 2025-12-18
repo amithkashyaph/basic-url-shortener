@@ -39,6 +39,12 @@ public class UserController {
         return userDTO;
     }
 
+    @PostMapping("/login")
+    public UserDTO loginUser(@RequestBody UserLoginDTO userLoginDTO) throws InvalidCredentialException {
+        UserDTO userDTO = userService.loginUser(userLoginDTO);
+        return userDTO;
+    }
+
 
 
 }
