@@ -45,6 +45,13 @@ public class UserController {
         return userDTO;
     }
 
+    @GetMapping("/my-urls")
+    public PagedResult<ShortUrlDTO> getUsersShortUrls(@RequestParam(defaultValue = "1") int pageNumber) {
+        Long userId = securityUtils.getCurrentLoggedInUser().getId();
+        PagedResult<ShortUrlDTO> shortUrlDTOPagedResult = userService.getUsersShortUrls(pageNumber, applicationProperties.pageSize(), userId);
+        return shortUrlDTOPagedResult;
+    }
+
 
 
 }
