@@ -52,6 +52,11 @@ public class UserController {
         return shortUrlDTOPagedResult;
     }
 
-
+    @PostMapping("/my-urls")
+    public ResponseEntity<String> deleteUsersShortUrls(@RequestBody DeleteUrlsRequestDTO deleteUrlsRequestDTO) throws InvalidRequestBodyException {
+        Long userId = securityUtils.getCurrentLoggedInUser().getId();
+        userService.deleteUsersUrls(deleteUrlsRequestDTO.ids(), userId);
+        return new ResponseEntity<>("Successfully deleted the urls", HttpStatus.OK);
+    }
 
 }
