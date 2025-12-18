@@ -33,4 +33,12 @@ public class UserController {
         this.securityUtils = securityUtils;
     }
 
+    @PostMapping("/register")
+    public UserDTO registerUser(@RequestBody @Valid UserRegisterDTO userRegisterDTO) throws UserAlreadyExistsException {
+        UserDTO userDTO = userService.registerUser(userRegisterDTO);
+        return userDTO;
+    }
+
+
+
 }
