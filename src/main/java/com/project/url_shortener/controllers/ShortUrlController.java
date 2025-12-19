@@ -31,6 +31,12 @@ public class ShortUrlController {
         return shortUrls;
     }
 
+    @PostMapping("/short-urls/create")
+    public ShortUrlDTO createShortUrl(@RequestBody @Valid CreateShortUrlDTO createShortUrlDTO) {
+        ShortUrlDTO shortUrlDTO = shortUrlService.createShortUrl(createShortUrlDTO);
+        return shortUrlDTO;
+    }
+
 
 
 }
