@@ -25,5 +25,12 @@ public class ShortUrlController {
         this.applicationProperties = applicationProperties;
     }
 
+    @GetMapping("/short-urls")
+    public PagedResult<ShortUrlDTO> getAllShortUrls(@RequestParam(defaultValue = "1") Integer page) {
+        PagedResult<ShortUrlDTO> shortUrls = shortUrlService.getAllShortUrls(page, applicationProperties.pageSize());
+        return shortUrls;
+    }
+
+
 
 }
