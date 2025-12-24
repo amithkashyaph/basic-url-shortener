@@ -22,5 +22,14 @@ public class UserRepositoryJdbcClient {
         this.jdbcClient = jdbcClient;
     }
 
+    public Optional<User> findById(Long id) {
+        String sql = "SELECT id, email, password, name, role, created_at FROM users WHERE id = :id";
+        return jdbcClient
+                .sql(sql)
+                .param("id", id)
+                .query(new UserRowMapper())
+                .optional();
+    }
+
 
 }
