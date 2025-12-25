@@ -40,5 +40,13 @@ public class UserRepositoryJdbcClient {
                 .query(new UserRowMapper())
                 .optional();
     }
+    public boolean existsByEmail(String email) {
+        String sql = "SELECT count(*) > 0 FROM users WHERE email = :email";
+        return jdbcClient
+                .sql(sql)
+                .param("email", email)
+                .query(Boolean.class)
+                .single();
+    }
 
 }
