@@ -48,5 +48,26 @@ public class UserRepositoryJdbcClient {
                 .query(Boolean.class)
                 .single();
     }
+    public User save(User user) {
+        String sql = """
+                INSERT INTO users (email, password, name, role, created_at)
+                VALUES (:email, :password, :name, :role, :createdAt)
+                """;
+        var keyHolder = new GeneratedKeyHolder();
+        jdbcClient.sql(sql)
+                .param("email", user.getEmail())
+                .param("password", user.getPassword())
+                .param("name", user.getName())
+                .param("role", user.getRole().name())
+                .param("createdAt", user.getCreatedAt())
+                .update(keyHolder);
+        Number key = keyHolder.getKey();
+        if (key != null) {
+            user.setId(key.longValue());
+        }
+        return user;
+    }
+
+
 
 }
