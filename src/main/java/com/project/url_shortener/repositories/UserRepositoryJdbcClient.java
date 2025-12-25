@@ -31,5 +31,14 @@ public class UserRepositoryJdbcClient {
                 .optional();
     }
 
+    public Optional<User> findByEmail(String email) {
+        String sql = "SELECT id, email, password, name, role, created_at FROM users WHERE email = :email";
+        return jdbcClient
+                .sql(sql)
+                .param("email", email)
+                //.query(User.class)
+                .query(new UserRowMapper())
+                .optional();
+    }
 
 }
