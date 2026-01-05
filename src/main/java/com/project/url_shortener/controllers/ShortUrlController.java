@@ -37,6 +37,10 @@ public class ShortUrlController {
         return shortUrlDTO;
     }
 
-
+    @GetMapping("/short-urls/{shortKey}")
+    public ShortUrlDTO getOriginalUrlFromShortKey(@PathVariable String shortKey) throws ShortKeyDoesNotExistException {
+        ShortUrlDTO shortUrlDTO = shortUrlService.getOriginalUrlFromShortKey(shortKey);
+        return shortUrlDTO;
+    }
 
 }
