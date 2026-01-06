@@ -30,4 +30,10 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+
+
+    @Bean
+    public RoleHierarchy roleHierarchy() {
+        return RoleHierarchyImpl.fromHierarchy("ROLE_ADMIN > ROLE_USER");
+    }
 }
