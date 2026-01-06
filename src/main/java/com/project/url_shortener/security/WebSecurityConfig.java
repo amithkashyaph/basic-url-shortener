@@ -30,7 +30,22 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.csrf(CsrfConfigurer::disable)
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(
+                                "/error", "/short-urls", "/register", "/login", "/auth/**"
+                        ).permitAll()
+                        .requestMatchers("/my-urls").authenticated()
+//                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
+                ).formLogin(form -> form.disable())
+                .httpBasic(httpBasic -> {})
+                .userDetailsService(securityUserDetailsService);
 
+        return httpSecurity.build();
+    }
 
     @Bean
     public RoleHierarchy roleHierarchy() {
