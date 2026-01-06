@@ -25,5 +25,9 @@ public class WebSecurityConfig {
         this.securityUserDetailsService = securityUserDetailsService;
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 }
