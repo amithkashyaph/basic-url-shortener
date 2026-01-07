@@ -55,4 +55,16 @@ public class ShortUrlServiceImpl implements ShortUrlService {
         return PagedResult.from(shortUrlPage);
     }
 
+
+
+    @Override
+    public ShortUrlDTO getOriginalUrlFromShortKey(String shortKey) throws ShortKeyDoesNotExistException {
+        Optional<ShortUrl> shortUrlOptional = shortUrlRespository.findByShortKey(shortKey);
+        if (!shortUrlOptional.isPresent()) {
+            throw new ShortKeyDoesNotExistException("Provided short key does not exist");
+        }
+        ShortUrlDTO shortUrlDTO = entityMapper.toShortUrlDTO(shortUrlOptional.get());
+        return shortUrlDTO;
+    }
+
 }
