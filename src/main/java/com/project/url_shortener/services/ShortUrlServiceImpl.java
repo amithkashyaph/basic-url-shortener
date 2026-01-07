@@ -55,8 +55,6 @@ public class ShortUrlServiceImpl implements ShortUrlService {
         return PagedResult.from(shortUrlPage);
     }
 
-
-
     @Override
     public ShortUrlDTO getOriginalUrlFromShortKey(String shortKey) throws ShortKeyDoesNotExistException {
         Optional<ShortUrl> shortUrlOptional = shortUrlRespository.findByShortKey(shortKey);
@@ -76,5 +74,12 @@ public class ShortUrlServiceImpl implements ShortUrlService {
         return shortKey;
     }
 
+    private static String generateRandomShortKey() {
+        StringBuilder stringBuilder = new StringBuilder(NO_OF_CHARACTERS);
+        for(int i = 0; i < NO_OF_CHARACTERS; i++) {
+            stringBuilder.append(CHARACTERS.charAt(RANDOM.nextInt(CHARACTERS.length())));
+        }
+        return stringBuilder.toString();
+    }
 
 }
