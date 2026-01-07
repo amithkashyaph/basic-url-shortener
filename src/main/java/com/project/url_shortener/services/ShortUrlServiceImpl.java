@@ -67,4 +67,14 @@ public class ShortUrlServiceImpl implements ShortUrlService {
         return shortUrlDTO;
     }
 
+    public String generateUniqueShortKey() {
+        String shortKey;
+        do {
+            shortKey = generateRandomShortKey();
+        }while (shortUrlRespository.existsByShortKey(shortKey));
+
+        return shortKey;
+    }
+
+
 }
