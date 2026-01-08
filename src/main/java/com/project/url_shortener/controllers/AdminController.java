@@ -19,5 +19,15 @@ import org.springframework.web.bind.annotation.RestController;
 @PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
 
+    private ShortUrlService shortUrlService;
+    private SecurityUtils securityUtils;
+
+    private ApplicationProperties applicationProperties;
+
+    public AdminController(ShortUrlService shortUrlService, SecurityUtils securityUtils, ApplicationProperties properties) {
+        this.securityUtils = securityUtils;
+        this.shortUrlService = shortUrlService;
+        this.applicationProperties = properties;
+    }
 
 }
