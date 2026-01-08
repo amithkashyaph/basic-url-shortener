@@ -56,6 +56,21 @@ public class ShortUrlServiceImpl implements ShortUrlService {
     }
 
     @Override
+    public ShortUrlDTO createShortUrl(CreateShortUrlDTO createShortUrlDTO) {
+        String shortKey = generateUniqueShortKey();
+        ShortUrl shortUrl = new ShortUrl();
+        shortUrl.setOriginalUrl(createShortUrlDTO.originalUrl());
+        shortUrl.setShortKey(shortKey);
+        shortUrl.setCreatedAt(LocalDateTime.now());
+        shortUrl.setIsPrivate(false);
+        shortUrl.setExpiresAt(LocalDateTime.now().plus(applicationProperties.defaultExpiryInDays(), ChronoUnit.DAYS));
+        shortUrl.setCreatedBy(userService.getCurrentUser());
+        shortUrl.setClickCount(0L);
+        shortUrlRespository.save(shortUrl);
+        return entityMapper.toShortUrlDTO(shortUrl);
+    }
+
+    @Override
     public ShortUrlDTO getOriginalUrlFromShortKey(String shortKey) throws ShortKeyDoesNotExistException {
         Optional<ShortUrl> shortUrlOptional = shortUrlRespository.findByShortKey(shortKey);
         if (!shortUrlOptional.isPresent()) {
