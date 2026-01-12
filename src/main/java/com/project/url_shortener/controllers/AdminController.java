@@ -32,6 +32,12 @@ public class AdminController {
 
     @GetMapping("/all-urls")
     public PagedResult<ShortUrlDTO> getAllUrls(@RequestParam(defaultValue = "1") int pageNumber) {
+        User user = securityUtils.getCurrentLoggedInUser();
+        if (user.getRole() != Role.ROLE_ADMIN) {
+            throw new AccessDeniedException("You are not an admin and not authorized to access this route");
+        }
+        PagedResult<ShortUrlDTO> shortUrlDTOPagedResult = shortUrlService.getAllShortUrls(pageNumber, applicationProperties.pageSize());
 
+        return shortUrlDTOPagedResult;
     }
 }
