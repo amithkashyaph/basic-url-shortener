@@ -30,4 +30,8 @@ public class AdminController {
         this.applicationProperties = properties;
     }
 
+    @GetMapping("/all-urls")
+    public PagedResult<ShortUrlDTO> getAllUrls(@RequestParam(defaultValue = "1") int pageNumber) {
+
+    }
 }
