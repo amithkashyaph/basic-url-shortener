@@ -48,4 +48,9 @@ public class UserServiceImpl implements UserService {
         this.userRepositoryJdbcClient = userRepositoryJdbcClient;
     }
 
+    @Override
+    public UserDTO registerUser(UserRegisterDTO userRegisterDTO) throws UserAlreadyExistsException {
+
+    }
+
 }
