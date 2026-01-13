@@ -30,5 +30,22 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private UserRepository userRepository;
+
+    private PasswordEncoder passwordEncoder;
+
+    private EntityMapper entityMapper;
+
+    private ShortUrlRespository shortUrlRespository;
+
+    private UserRepositoryJdbcClient userRepositoryJdbcClient;
+
+    UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, EntityMapper entityMapper, ShortUrlRespository shortUrlRespository, UserRepositoryJdbcClient userRepositoryJdbcClient) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.entityMapper = entityMapper;
+        this.shortUrlRespository = shortUrlRespository;
+        this.userRepositoryJdbcClient = userRepositoryJdbcClient;
+    }
 
 }
