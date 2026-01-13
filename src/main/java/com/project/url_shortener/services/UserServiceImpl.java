@@ -50,7 +50,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO registerUser(UserRegisterDTO userRegisterDTO) throws UserAlreadyExistsException {
+        Optional<User> user = userRepositoryJdbcClient.findByEmail(userRegisterDTO.getEmail());
+        if(user.isPresent()) {
+            throw new UserAlreadyExistsException("User with given email " + userRegisterDTO.getEmail() + " already exists");
+        }
+        User newUser = new User();
+        newUser.setName(userRegisterDTO.getName());
+        newUser.setEmail(userRegisterDTO.getEmail());
+        newUser.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
+        newUser.setRole(userRegisterDTO.getRole());
 
+        User savedUser = userRepositoryJdbcClient.save(newUser);
+        return entityMapper.toUserDTO(savedUser);
     }
 
 }
