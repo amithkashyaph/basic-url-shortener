@@ -64,4 +64,16 @@ public class UserServiceImpl implements UserService {
         return entityMapper.toUserDTO(savedUser);
     }
 
+    @Override
+    public UserDTO loginUser(UserLoginDTO userLoginDTO) throws InvalidCredentialException {
+        User user = userRepository.findByEmail(userLoginDTO.email())
+                .orElseThrow(() -> new UsernameNotFoundException("The user with the given email does not exist " + userLoginDTO.email()));
+
+        if(!passwordEncoder.matches(userLoginDTO.password(), user.getPassword())) {
+            throw new InvalidCredentialException("Provided credentials are invalid");
+        }
+
+        return entityMapper.toUserDTO(user);
+    }
+
 }
