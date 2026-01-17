@@ -92,4 +92,13 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public PagedResult<ShortUrlDTO> getUsersShortUrls(int pageNumber, int pageSize, Long userId) {
+        pageNumber = pageNumber > 1 ? pageNumber - 1 : 0;
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, "createdAt"));
+        Page<ShortUrlDTO> shortUrlDTOPage = shortUrlRespository.findByCreatedById(userId, pageable).map(entityMapper::toShortUrlDTO);
+        return PagedResult.from(shortUrlDTOPage);
+    }
+
 }
