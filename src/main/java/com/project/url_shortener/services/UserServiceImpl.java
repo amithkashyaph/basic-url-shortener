@@ -76,4 +76,8 @@ public class UserServiceImpl implements UserService {
         return entityMapper.toUserDTO(user);
     }
 
+    public User getCurrentUser() {
+        return null;
+    }
+
 }
