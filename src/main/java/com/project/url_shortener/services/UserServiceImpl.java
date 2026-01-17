@@ -77,7 +77,19 @@ public class UserServiceImpl implements UserService {
     }
 
     public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return null;
+        }
+
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            String userName = ((UserDetails) principal).getUsername();
+            User user = userRepository.findByEmail(userName).orElse(null);
+            return user;
+        }
         return null;
     }
-
 }
