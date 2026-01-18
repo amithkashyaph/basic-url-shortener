@@ -101,4 +101,13 @@ public class UserServiceImpl implements UserService {
         return PagedResult.from(shortUrlDTOPage);
     }
 
+
+    @Transactional
+    @Override
+    public void deleteUsersUrls(List<Long> ids, Long userId) throws InvalidRequestBodyException {
+        if (ids == null || ids.isEmpty()) {
+            throw new InvalidRequestBodyException("Please provide the ids of the urls to be deleted");
+        }
+        shortUrlRespository.deleteByIdInAndCreatedById(ids, userId);
+    }
 }
